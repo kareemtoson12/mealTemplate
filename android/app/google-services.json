@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1091671038759",
+    "project_id": "nti6-38c02",
+    "storage_bucket": "nti6-38c02.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1091671038759:android:cd62d7db7ed14f3bcea702",
+        "android_client_info": {
+          "package_name": "com.example.tempmealapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXrztjLrZrJLp6tIdOLJ6gs-34Mj9NAQw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
