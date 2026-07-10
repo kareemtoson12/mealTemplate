@@ -1,7 +1,9 @@
 // Karim Toson || kareemtoson1@gmail.com || Tue Apr 28 2026 19:23:43
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tempmealapp/core/styles/styles_manager.dart';
+import 'package:tempmealapp/features/home/cubit/home_cubit.dart';
 import 'package:tempmealapp/features/home/widgets/category_chip.dart';
 
 class CategorySection extends StatefulWidget {
@@ -54,6 +56,7 @@ class _CategorySectionState extends State<CategorySection> {
                   setState(() {
                     selectedIndex = index;
                   });
+                  context.read<HomeCubit>().filterMeals(categories[index]);
                 },
               );
             },
