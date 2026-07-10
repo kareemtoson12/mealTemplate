@@ -30,11 +30,14 @@ final List<Meal> meals = [
     title: 'Healthy Taco Salad with fresh vegetable',
     kcal: '120 Kcal',
     time: '20 Min',
+    mealType: ''
   ),
   Meal(
     image: 'assets/meal.png',
     title: 'Japanese-style Pancakes Recipe',
     kcal: '64 Kcal',
     time: '12 Min',
+    mealType: ''
+
   ),
 ];
