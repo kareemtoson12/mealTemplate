@@ -25,6 +25,7 @@ class StylesManager {
   );
   static TextStyle white20Bold = TextStyle(
     fontSize: 20,
+  
     fontWeight: FontWeight.bold,
     color: Colors.white,
   );

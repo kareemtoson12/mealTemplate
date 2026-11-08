@@ -1,10 +1,12 @@
 // Karim Toson || kareemtoson1@gmail.com || Tue Apr 28 2026 18:20:00
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tempmealapp/core/styles/colors_manager.dart';
 import 'package:tempmealapp/core/styles/styles_manager.dart';
 import 'package:tempmealapp/core/widgtes/button_widget.dart';
+import 'package:tempmealapp/features/auth/signup/cubit/signup_cubit.dart';
+import 'package:tempmealapp/features/auth/signup/cubit/states.dart';
 import 'package:tempmealapp/features/auth/widgets/custom_text_form_field.dart';
 import 'package:tempmealapp/features/auth/widgets/or_divider.dart';
 
@@ -83,9 +85,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         style: TextStyle(color: ColorsManager.greyColor),
                       ),
                       GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/login');
-                        },
+                        onTap: () {},
                         child: Text(
                           "login",
                           style: TextStyle(color: ColorsManager.greyColor),
@@ -95,13 +95,36 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
 
                   SizedBox(height: screenHeight * 0.05),
-                  ButtonWidget(
-                    onpress: () {
-                      if (kDebugMode) {
-                        print('login');
+                  BlocListener<SignupCubit, SignUpStates>(
+                    listener: (context, state) {
+                      if (state is LoadingState) {
+                        //loading at snackbar
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Row(
+                              children: [
+                                CircularProgressIndicator(),
+                                SizedBox(width: 20),
+                                Text('Loading...'),
+                              ],
+                            ),
+                          ),
+                        );
+                      }
+                      if (state is SuccessState) {
+                        Navigator.pushReplacementNamed(context, '/home');
                       }
                     },
-                    text: 'Sign up',
+                    child: ButtonWidget(
+                      onpress: () {
+                        context.read<SignupCubit>().signUp(
+                          emailController.text,
+                          passwordController.text,
+                          nameController.text,
+                        );
+                      },
+                      text: 'Sign up',
+                    ),
                   ),
                   SizedBox(height: screenHeight * 0.03),
                   OrDivider(),
