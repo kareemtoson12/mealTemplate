@@ -85,7 +85,9 @@ class _SignupScreenState extends State<SignupScreen> {
                         style: TextStyle(color: ColorsManager.greyColor),
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, '/login');
+                        },
                         child: Text(
                           "login",
                           style: TextStyle(color: ColorsManager.greyColor),

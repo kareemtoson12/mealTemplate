@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tempmealapp/features/auth/login/cubit/login_cubit.dart';
 import 'package:tempmealapp/features/auth/login/login_screen.dart';
 import 'package:tempmealapp/features/auth/signup/cubit/signup_cubit.dart';
 import 'package:tempmealapp/features/auth/signup/signup_screen.dart';
@@ -33,7 +34,10 @@ class MyApp extends StatelessWidget {
           create: (context) => SignupCubit(),
           child: SignupScreen(),
         ),
-        '/login': (context) => LoginScreen(),
+        '/login': (context) => BlocProvider(
+          create: (context) => LoginCubit(),
+          child: LoginScreen(),
+        ),
         '/home': (context) => MainNavigation(),
       },
     );

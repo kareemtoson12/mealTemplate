@@ -2,14 +2,15 @@
 
 // Karim Toson || kareemtoson1@gmail.com || Tue Apr 28 2026 18:20:00
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tempmealapp/core/styles/colors_manager.dart';
 import 'package:tempmealapp/core/styles/styles_manager.dart';
 import 'package:tempmealapp/core/widgtes/button_widget.dart';
+import 'package:tempmealapp/features/auth/login/cubit/login_cubit.dart';
+import 'package:tempmealapp/features/auth/login/cubit/states.dart';
 import 'package:tempmealapp/features/auth/widgets/custom_text_form_field.dart';
 import 'package:tempmealapp/features/auth/widgets/or_divider.dart';
-
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -70,14 +71,31 @@ class _SignupScreenState extends State<LoginScreen> {
                     controller: passwordController,
                   ),
                   SizedBox(height: screenHeight * 0.05),
-                  ButtonWidget(
-                    onpress: () {
-                      if (kDebugMode) {
-                        print('login');
+                  BlocListener<LoginCubit, LoginState>(
+                    listener: (context, state) {
+                      if (state is LoginSuccess) {
+                        Navigator.pushNamed(context, '/home');
                       }
-                      Navigator.pushNamed(context, '/home');
+                      if (state is LoginFailure) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(state.errorMessage)),
+                        );
+                      }
+                      if (state is LoginLoading) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: CircularProgressIndicator()),
+                        );
+                      }
                     },
-                    text: 'Log in ',
+                    child: ButtonWidget(
+                      onpress: () {
+                        context.read<LoginCubit>().login(
+                          email: emailController.text,
+                          password: passwordController.text,
+                        );
+                      },
+                      text: 'Log in ',
+                    ),
                   ),
                   SizedBox(height: screenHeight * 0.02),
 
