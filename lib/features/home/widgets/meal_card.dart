@@ -24,7 +24,7 @@ class MealCard extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
-                child: Image.asset(
+                child: Image.network(
                   meal.image,
                   height: 120,
                   width: double.infinity,

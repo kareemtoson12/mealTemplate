@@ -29,7 +29,7 @@ class OnboardingScreen extends StatelessWidget {
           SizedBox(height: height * 0.08),
           ButtonWidget(
             onpress: () {
-              Navigator.pushNamed(context, '/signup');
+              Navigator.pushNamed(context, '/home');
             },
             text: 'Start',
           ),
